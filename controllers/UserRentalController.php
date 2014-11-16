@@ -40,7 +40,7 @@ class UserRentalController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+//dummy comment
     /**
      * Displays a single UserRental model.
      * @param integer $id
