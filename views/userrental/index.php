@@ -19,20 +19,27 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create User Rental', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+            
+            
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'user_id',
-            'car_id',
+            //'user_id',
+            [
+                'label'=>'Car',
+                'attribute' => 'car_id',
+                'value' => 'car.fullName'
+            ],
+      
             'rental_id',
-            'date_start',
-            'date_finish',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            
+            'startDate',
+            'endDate',
+           // ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 
 </div>

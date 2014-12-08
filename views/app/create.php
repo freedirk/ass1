@@ -1,32 +1,21 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserRental */
 
-$this->title = $model->rental_id;
+$this->title = 'Create User Rental';
 $this->params['breadcrumbs'][] = ['label' => 'User Rentals', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-rental-view">
+<div class="user-rental-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-       
-    </p>
-
-    <?= DetailView::widget([
+    <?= $this->render('_form', [
         'model' => $model,
-        'attributes' => [
-            'user_id',
-            'car_id',
-            'rental_id',
-            'startDate',
-            'endDate',
-        ],
     ]) ?>
 
 </div>

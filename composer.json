@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-gii": "*",
-        "dektrium/yii2-user": "*"
+        "dektrium/yii2-user": "*",
+        "2amigos/yii2-date-picker-widget": "*"
 
     },
     "require-dev": {

@@ -51,6 +51,11 @@ class Car extends \yii\db\ActiveRecord
             'category' => 'Category',
         ];
     }
+    
+    
+    public function getFullName(){
+        return $this->make . " ". $this->model;
+    }
 
     /**
      * @return \yii\db\ActiveQuery

@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use backend\models\Standard;
+use app\models\Car;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserRental */
@@ -12,15 +16,35 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?= $form->field($model, 'car_id')->textInput() ?>
+<?= $form->field($model, 'car_id')->dropDownList(
+      ArrayHelper::map(Car::find()->all(), 'car_id', 'fullName')) ?>
 
-    <?= $form->field($model, 'rental_id')->textInput() ?>
 
-    <?= $form->field($model, 'date_start')->textInput() ?>
 
-    <?= $form->field($model, 'date_finish')->textInput() ?>
+       <?= $form->field($model, 'date_start')->widget(
+    DatePicker::className(), [
+        // inline too, not bad
+        'inline' => true, 
+        // modify template for custom rendering
+        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd'
+        ]
+]);?>
+   
+    <?= $form->field($model, 'date_finish')->widget(
+    DatePicker::className(), [
+        // inline too, not bad
+        'inline' => true, 
+        // modify template for custom rendering
+        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd'
+        ]
+]);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -12,10 +12,9 @@ use yii\filters\VerbFilter;
 /**
  * CarController implements the CRUD actions for Car model.
  */
-class CarController extends Controller
-{
-    public function behaviors()
-    {
+class CarController extends Controller {
+
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -26,20 +25,28 @@ class CarController extends Controller
         ];
     }
 
+    public function beforeAction($action) {
+        $user = \dektrium\user\models\User::find()->where(['id' => Yii::$app->user->id])->one();
+        if ($user && $user->role == 'admin') {
+            return parent::beforeAction($action);
+        } else {
+            throw new \yii\web\HttpException(403, 'Stay outa here');
+        }
+    }
+
     /**
      * Lists all Car models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
 //        var_dump(Yii::$app->user->username);
 //        die();
         $searchModel = new CarSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -48,10 +55,9 @@ class CarController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -60,15 +66,14 @@ class CarController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Car();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->car_id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -79,15 +84,14 @@ class CarController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->car_id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -98,8 +102,7 @@ class CarController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -112,12 +115,12 @@ class CarController extends Controller
      * @return Car the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Car::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
