@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2014 at 04:35 PM
+-- Generation Time: Dec 08, 2014 at 11:29 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,14 +35,16 @@ CREATE TABLE IF NOT EXISTS `car` (
   PRIMARY KEY (`car_id`),
   UNIQUE KEY `car_id_UNIQUE` (`car_id`),
   UNIQUE KEY `number_plate_UNIQUE` (`number_plate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='details of the cars available to rent' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='details of the cars available to rent' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `car`
 --
 
 INSERT INTO `car` (`car_id`, `make`, `model`, `number_plate`, `category`) VALUES
-(1, 'test', 'test', 'test', 'a');
+(1, 'Ford', 'Focus', 'AABD 12D', 'a'),
+(2, 'Vauxhall', 'Corsa', 'DSSB 332', '123123'),
+(3, 'Mercedes', 'C180', 'IM GAY', '12312312');
 
 -- --------------------------------------------------------
 
@@ -93,7 +95,8 @@ CREATE TABLE IF NOT EXISTS `profile` (
 
 INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`) VALUES
 (1, NULL, NULL, 'richardjohnhurd@gmail.com', '01ae0238ef98e2bc7ca1b656ce2d3d6a', NULL, NULL, NULL),
-(2, NULL, NULL, 'mcnally486@gmail.com', 'a75830c0f879db61784222b20719eb2d', NULL, NULL, NULL);
+(2, NULL, NULL, 'mcnally486@gmail.com', 'a75830c0f879db61784222b20719eb2d', NULL, NULL, NULL),
+(3, NULL, NULL, 'test@test.com', 'b642b4217b34b1e8d3bd915fc65c4452', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +134,8 @@ CREATE TABLE IF NOT EXISTS `token` (
 --
 
 INSERT INTO `token` (`user_id`, `code`, `created_at`, `type`) VALUES
-(1, '1s3AbGGanvVVI5UGsUSQzKIrChJGzUnJ', 1416146543, 0);
+(1, '1s3AbGGanvVVI5UGsUSQzKIrChJGzUnJ', 1416146543, 0),
+(3, '1PUOL5r9KVFOxAgllKNGpq1gQtGDfle9', 1418076928, 0);
 
 -- --------------------------------------------------------
 
@@ -156,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_unique_username` (`username`),
   UNIQUE KEY `user_unique_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user`
@@ -164,7 +168,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `role`, `registration_ip`, `created_at`, `updated_at`, `flags`) VALUES
 (1, 'freedirk', 'richardjohnhurd@gmail.com', '$2y$10$Afmlq5jVs63h6gKYZmMF8eHPMgCSzZOW9rxabZm7mKVVqbXNhiNci', 'CxwG0g1PwlSn-3KfSoM8SxlLd9SDYNbP', 1, NULL, NULL, 'admin', 0, 1416146542, 1416146542, 0),
-(2, 'chris', 'mcnally486@gmail.com', '$2y$10$GFinC649kjJTGwF0qSGvVOhiQ3oqTSLn4au.LQOfnLUKxBwkG5Kou', 'G_ifiP7Od-y6NrHRlLWpVOWJ6rE5zNXb', 1416148470, NULL, NULL, NULL, 0, 1416148470, 1416148470, 0);
+(2, 'chris', 'mcnally486@gmail.com', '$2y$10$GFinC649kjJTGwF0qSGvVOhiQ3oqTSLn4au.LQOfnLUKxBwkG5Kou', 'G_ifiP7Od-y6NrHRlLWpVOWJ6rE5zNXb', 1416148470, NULL, NULL, NULL, 0, 1416148470, 1416148470, 0),
+(3, 'testuser', 'test@test.com', '$2y$10$smRSbAwE.C1Rki.zeHKHKe4J.Ac9ZimEYB3FzurEPVJrcw8gUJq2a', 'M0E2ScqWtQDHvzWgcsBVYKNWcblUJ7Yh', 1, NULL, NULL, '', 0, 1418076928, 1418076928, 0);
 
 -- --------------------------------------------------------
 
@@ -199,13 +204,26 @@ CREATE TABLE IF NOT EXISTS `user_old` (
 CREATE TABLE IF NOT EXISTS `user_rental` (
   `user_id` int(11) NOT NULL,
   `car_id` int(11) NOT NULL,
-  `rental_id` int(11) NOT NULL,
+  `rental_id` int(11) NOT NULL AUTO_INCREMENT,
   `date_start` date NOT NULL,
   `date_finish` date NOT NULL,
   PRIMARY KEY (`rental_id`),
   KEY `user_id_idx` (`user_id`),
   KEY `car_id_idx` (`car_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Details of the rentals of the cars and the users, with rental periods';
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Details of the rentals of the cars and the users, with rental periods' AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `user_rental`
+--
+
+INSERT INTO `user_rental` (`user_id`, `car_id`, `rental_id`, `date_start`, `date_finish`) VALUES
+(1, 1, 1, '0000-00-00', '0000-00-00'),
+(1, 1, 2, '0000-00-00', '0000-00-00'),
+(1, 3, 3, '0000-00-00', '0000-00-00'),
+(1, 1, 4, '0000-00-00', '0000-00-00'),
+(1, 1, 5, '2014-12-03', '2014-12-03'),
+(2, 1, 6, '2014-12-10', '2014-12-03'),
+(1, 1, 7, '2014-12-18', '2014-12-17');
 
 --
 -- Constraints for dumped tables
@@ -233,8 +251,8 @@ ALTER TABLE `token`
 -- Constraints for table `user_rental`
 --
 ALTER TABLE `user_rental`
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `car_id` FOREIGN KEY (`car_id`) REFERENCES `car` (`car_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `car_id` FOREIGN KEY (`car_id`) REFERENCES `car` (`car_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
