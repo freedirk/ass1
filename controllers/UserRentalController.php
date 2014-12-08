@@ -33,6 +33,9 @@ class UserRentalController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserRentalSearch();
+        
+        
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

@@ -22,7 +22,10 @@ AppAsset::register($this);
 </head>
 <body>
 
-<?php $this->beginBody() ?>
+<?php $this->beginBody()
+// var_dump(Yii::$app->user);
+        
+        ?>
     <div class="wrap">
         <?php
             NavBar::begin([
@@ -36,10 +39,10 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    
-                    Yii::$app->user->isGuest ? ['label' => 'Sign up', 'url' => ['/site/contact']]:"",
+//                    ['label' => 'About', 'url' => ['/site/about']],
+ //                   ['label' => 'Contact', 'url' => ['/site/contact']],
+                      !Yii::$app->user->isGuest ? ['label' => 'Rent a car', 'url' => ['/site/contact']] :"",
+                    Yii::$app->user->isGuest ? ['label' => 'Sign up', 'url' => ['/user/registration/register']]:"",
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/user/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
