@@ -9,7 +9,15 @@ $this->title = 'My Yii Application';
 
         <p class="lead">The most unreliable cars on the planet</p>
 
-        <p><a class="btn btn-lg btn-success" href="index.php/user/register">Get started now</a></p>
+      <?php if (Yii::$app->user->isGuest) {
+            echo '<p><a class="btn btn-lg btn-success" href="index.php/user/register">Get started</a></p>';
+        }else{
+            echo '<p><a class="btn btn-lg btn-success" href="index.php/rental/create">Rent a car</a></p>';
+        } 
+        
+        
+        ?>
+      
     </div>
 
     <div class="body-content">
