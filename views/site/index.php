@@ -16,13 +16,13 @@ $this->title = 'My Yii Application';
 
         <div class="row">
             <div class="col-lg-4">
-                <img style="width: 100%"  src="img/american-rust-meitle-1.jpg">
+                <img style="width: 100%"  src="<?php echo \Yii::getAlias('@web');?>/img/american-rust-meitle-1.jpg">
             </div>
             <div class="col-lg-4">
-                <img style="width: 100%" src="img/old-banger.jpg">
+                <img style="width: 100%" src="<?php echo \Yii::getAlias('@web');?>/img/old-banger.jpg">
             </div>
             <div class="col-lg-4">
-                  <img style="width: 100%"  src="img/images.jpg">
+                  <img style="width: 100%"  src="<?php echo \Yii::getAlias('@web');?>/img/images.jpg">
             </div>
         </div>
 

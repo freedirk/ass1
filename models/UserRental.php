@@ -74,7 +74,7 @@ class UserRental extends \yii\db\ActiveRecord {
     }
 
     public function getendDate() {
-        return date('d/m/Y', strtotime($this->date_start));
+        return date('d/m/Y', strtotime($this->date_finish));
     }
 
 }

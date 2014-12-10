@@ -52,7 +52,9 @@ AppAsset::register($this);
                   $isAdmin ? ['label' => 'Rentals', 'url' => ['/app/index']] : "",
                   $isAdmin ? ['label' => 'Users', 'url' => ['/user/admin']] : "",
                 //$isAdmin ? ['label' => 'Rentals', 'url' => ['/app/index']] : "",
-                !Yii::$app->user->isGuest && !$isAdmin ? ['label' => 'Rent a car', 'url' => ['/userrental/create']] : "",
+               
+                !Yii::$app->user->isGuest && !$isAdmin ? ['label' => 'Rent a car', 'url' => ['/rental/create']] : "",
+                  !Yii::$app->user->isGuest && !$isAdmin ? ['label' => 'Edit your details', 'url' => ['/user/settings']] : "",
                 Yii::$app->user->isGuest ? ['label' => 'Sign up', 'url' => ['/user/registration/register']] : "",
                 Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/user/login']] :
@@ -79,7 +81,7 @@ Breadcrumbs::widget([
         <footer class="footer">
             <div class="container">
                 <p class="pull-left">&copy; Rent-a-Lemon<?= date('Y') ?></p>
-                <p class="pull-right"><?= Yii::powered() ?></p>
+                
             </div>
         </footer>
 
